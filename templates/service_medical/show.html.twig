@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la fiche médicale{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Détails de la fiche médicale</h1>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>{{ ficheMedical.nom }} {{ ficheMedical.prenom }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <th>N° Dossier</th>
+                                <td>{{ ficheMedical.numeroDossier }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nom de jeune fille</th>
+                                <td>{{ ficheMedical.nomJeuneFille }}</td>
+                            </tr>
+                            <tr>
+                                <th>Née à</th>
+                                <td>{{ ficheMedical.nee }}</td>
+                            </tr>
+                            <tr>
+                                <th>Adresse</th>
+                                <td>{{ ficheMedical.adresse }}</td>
+                            </tr>
+                            <tr>
+                                <th>Téléphone</th>
+                                <td>{{ ficheMedical.telephone }}</td>
+                            </tr>
+                            <tr>
+                                <th>Personne à contacter</th>
+                                <td>{{ ficheMedical.personneAContacter }}</td>
+                            </tr>
+                            <tr>
+                                <th>Profession</th>
+                                <td>{{ ficheMedical.profession }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <th>Groupe sanguin/Rhésus</th>
+                                <td>{{ ficheMedical.groupeSanguinRhesus }}</td>
+                            </tr>
+                            <tr>
+                                <th>Allergie</th>
+                                <td>{{ ficheMedical.allergie }}</td>
+                            </tr>
+                            <tr>
+                                <th>Antécédents familiaux</th>
+                                <td>{{ ficheMedical.antecedentsFamiliaux }}</td>
+                            </tr>
+                            <tr>
+                                <th>Antécédents personnels</th>
+                                <td>{{ ficheMedical.antecedentsPersonnels }}</td>
+                            </tr>
+                            <tr>
+                                <th>Correspondants médicaux</th>
+                                <td>{{ ficheMedical.correspondantsMedicaux }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date</th>
+                                <td>{{ ficheMedical.date ? ficheMedical.date|date('d/m/Y') : '' }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Diagnostic</strong></label>
+                            <p>{{ ficheMedical.diagnostic }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Conduite à tenir dans l'avenir</strong></label>
+                            <p>{{ ficheMedical.conduiteAvenir }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Employé</strong></label>
+                            <p>{{ ficheMedical.employe ? ficheMedical.employe.nom ~ ' ' ~ ficheMedical.employe.prenom : 'Non associé' }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ path('app_service_medical_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                <a href="{{ path('app_service_medical_edit', {'id': ficheMedical.id}) }}" class="btn btn-warning">Modifier</a>
+
+                <form method="post" action="{{ path('app_service_medical_delete', {'id': ficheMedical.id}) }}" style="display:inline;"
+                      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette fiche médicale ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ficheMedical.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

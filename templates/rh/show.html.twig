@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'employé{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Détails de l'employé</h1>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>{{ employe.nom }} {{ employe.prenom }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <th>Matricule</th>
+                                <td>{{ employe.matricule }}</td>
+                            </tr>
+                            <tr>
+                                <th>Numéro CNPS</th>
+                                <td>{{ employe.numeroCnps }}</td>
+                            </tr>
+                            <tr>
+                                <th>Catégorie de contrat</th>
+                                <td>{{ employe.categorieContrat }}</td>
+                            </tr>
+                            <tr>
+                                <th>Situation matrimoniale</th>
+                                <td>{{ employe.situationMatrimoniale }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date de naissance</th>
+                                <td>{{ employe.dateNaissance ? employe.dateNaissance|date('d/m/Y') : '' }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <th>Âge</th>
+                                <td>{{ employe.age }}</td>
+                            </tr>
+                            <tr>
+                                <th>Genre</th>
+                                <td>{{ employe.genre }}</td>
+                            </tr>
+                            <tr>
+                                <th>Groupe sanguin</th>
+                                <td>{{ employe.groupeSanguin }}</td>
+                            </tr>
+                            <tr>
+                                <th>Contact</th>
+                                <td>{{ employe.contact }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date d'entrée</th>
+                                <td>{{ employe.dateEntree|date('d/m/Y') }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Département</strong></label>
+                            <p>{{ employe.departement.nom }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Service</strong></label>
+                            <p>{{ employe.service.nom }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Fonction</strong></label>
+                            <p>{{ employe.fonction.nom }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ path('app_rh_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                <a href="{{ path('app_rh_edit', {'id': employe.id}) }}" class="btn btn-warning">Modifier</a>
+
+                <form method="post" action="{{ path('app_rh_delete', {'id': employe.id}) }}" style="display:inline;"
+                      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet employé ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ employe.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

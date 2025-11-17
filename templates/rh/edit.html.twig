@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un employé{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Modifier un employé</h1>
+
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.nom) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.prenom) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.dateEntree) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.matricule) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.numeroCnps) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.categorieContrat) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.situationMatrimoniale) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.dateNaissance) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.age) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.genre) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.groupeSanguin) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.contact) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    {{ form_row(form.departement) }}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    {{ form_row(form.service) }}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    {{ form_row(form.fonction) }}
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary">{{ button_label|default('Mettre à jour') }}</button>
+        <a href="{{ path('app_rh_index') }}" class="btn btn-secondary">Retour à la liste</a>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

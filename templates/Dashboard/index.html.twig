@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Tableau de bord</h1>
+
+        <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Ressources Humaines</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Gestion des employés, contrats et visites médicales.</p>
+                        <a href="{{ path('app_rh_index') }}" class="btn btn-primary">Accéder à la RH</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Service Médical</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Gestion des fiches médicales et visites médicales.</p>
+                        <a href="{{ path('app_service_medical_index') }}" class="btn btn-primary">Accéder au Service Médical</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
