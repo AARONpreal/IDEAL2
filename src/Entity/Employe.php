@@ -34,13 +34,14 @@ class Employe
     #[Assert\NotBlank]
     #[Assert\Length(max: 50)]
     private $matricule = null;
+
     public function generateMatricule(): void
     {
         if ($this->matricule === null) {
-            // Génère un matricule du type EMP-2025-XXXX (numéro aléatoire)
             $this->matricule = 'EMP-' . date('Y') . '-' . str_pad(random_int(1, 9999), 4, '0', STR_PAD_LEFT);
         }
     }
+
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     #[Assert\Length(max: 50)]
     private $numeroCnps;
@@ -72,17 +73,20 @@ class Employe
     #[Assert\Length(max: 255)]
     private $contact;
 
-    #[ORM\ManyToOne(targetEntity: Departement::class)]
+    // CORRECTION : Ajout de inversedBy
+    #[ORM\ManyToOne(targetEntity: Departement::class, inversedBy: 'employes')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     private $departement;
 
-    #[ORM\ManyToOne(targetEntity: Service::class)]
+    // CORRECTION : Ajout de inversedBy
+    #[ORM\ManyToOne(targetEntity: Service::class, inversedBy: 'employes')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     private $service;
 
-    #[ORM\ManyToOne(targetEntity: Fonction::class)]
+    // CORRECTION : Ajout de inversedBy
+    #[ORM\ManyToOne(targetEntity: Fonction::class, inversedBy: 'employes')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     private $fonction;
@@ -308,7 +312,6 @@ class Employe
     public function removeContrat(Contrat $contrat): self
     {
         if ($this->contrats->removeElement($contrat)) {
-            // set the owning side to null (unless already changed)
             if ($contrat->getEmploye() === $this) {
                 $contrat->setEmploye(null);
             }
@@ -338,7 +341,6 @@ class Employe
     public function removeVisitesMedical(VisiteMedical $visitesMedical): self
     {
         if ($this->visitesMedicales->removeElement($visitesMedical)) {
-            // set the owning side to null (unless already changed)
             if ($visitesMedical->getEmploye() === $this) {
                 $visitesMedical->setEmploye(null);
             }
@@ -354,7 +356,6 @@ class Employe
 
     public function setFicheMedical(?FicheMedical $ficheMedical): self
     {
-        // set (or unset) the owning side of the relation if necessary
         $newEmploye = $ficheMedical === null ? null : $this;
         if ($newEmploye !== $ficheMedical->getEmploye()) {
             $ficheMedical->setEmploye($newEmploye);

@@ -77,7 +77,8 @@ class FicheMedical
     #[ORM\Column(type: 'text', nullable: true)]
     private $conduiteAvenir;
 
-    #[ORM\OneToOne(targetEntity: Employe::class, inversedBy: 'ficheMedical', cascade: ['persist', 'remove'])]
+    // CORRECTION : Retrait du cascade remove pour éviter suppression en cascade
+    #[ORM\OneToOne(targetEntity: Employe::class, inversedBy: 'ficheMedical')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     private $employe;

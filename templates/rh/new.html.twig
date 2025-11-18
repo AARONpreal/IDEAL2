@@ -107,4 +107,22 @@
         <a href="{{ path('app_rh_index') }}" class="btn btn-secondary">Retour à la liste</a>
         {{ form_end(form) }}
     </div>
+{% block javascripts %}
+    <script>
+        // Calcul automatique de l'âge
+        const dateNaissanceInput = document.getElementById('employe_dateNaissance');
+        const ageInput = document.getElementById('employe_age');
+
+        if (dateNaissanceInput && ageInput) {
+            dateNaissanceInput.addEventListener('change', function() {
+                const dateNaissance = new Date(this.value);
+                const today = new Date();
+                const age = Math.floor((today - dateNaissance) / (365.25 * 24 * 60 * 60 * 1000));
+
+                if (age >= 0) {
+                    ageInput.value = age;
+                }
+            });
+        }
+    </script>
 {% endblock %}
